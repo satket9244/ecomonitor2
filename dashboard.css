@@ -1,0 +1,103 @@
+/* Dashboard.css */
+
+.dashboard-container {
+    display: grid;
+    height: 100vh;
+    /* Teljes képernyő (1080p) */
+    width: 100vw;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    gap: 16px;
+    /* Távolság a dobozok között */
+
+    /* A rács felosztása: 4 oszlop, 3 sor. Az arányok (2:3:3:2) biztosítják, hogy a térkép a legszélesebb legyen, és a trendek/levegő dobozok egyenlő szélesek maradjanak, a képnek megfelelően. */
+    grid-template-columns: 2fr 3fr 3fr 2fr;
+    grid-template-rows: 80px 1fr 1fr;
+
+    /* Itt rajzoljuk le a fotód szerkezetét! */
+    grid-template-areas:
+        "header header header header"
+        "meteo map map hulladek"
+        "meteo trendek levego ai";
+}
+
+/* A dobozok stílusai */
+.dashboard-card {
+    border-radius: 8px;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Csatoljuk a grid területeket a kártyákhoz és megadjuk a fotón lévő színeket */
+.header {
+    grid-area: header;
+    background-color: #435b71;
+}
+
+.meteo {
+    grid-area: meteo;
+    background-color: #e5ce40;
+    color: black;
+    justify-content: flex-start;
+}
+
+.map {
+    grid-area: map;
+    background-color: #49a5e6;
+}
+
+.hulladek {
+    grid-area: hulladek;
+    background-color: #e38d43;
+}
+
+.trendek {
+    grid-area: trendek;
+    background-color: #3bbca0;
+}
+
+.levego {
+    grid-area: levego;
+    background-color: #a470bc;
+}
+
+.ai {
+    grid-area: ai;
+    background-color: #e26154;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* MOBIL NÉZET: Ha kis képernyőn nyitják meg, minden csússzon egymás alá! */
+@media only screen and (max-width: 1024px) {
+    .dashboard-container {
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "map"
+            "meteo"
+            "trendek"
+            "levego"
+            "hulladek"
+            "ai";
+    }
+}
