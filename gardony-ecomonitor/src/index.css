@@ -1,8 +1,230 @@
-body {
+/* ===== METROPOL-IX Design System ===== */
+/* Urban Intelligence Platform - Gárdony EcoMonitor */
+
+:root {
+  /* Surface Colors */
+  --surface:                  #0b1326;
+  --surface-dim:              #0b1326;
+  --surface-bright:           #31394d;
+  --surface-container-lowest: #060e20;
+  --surface-container-low:    #131b2e;
+  --surface-container:        #171f33;
+  --surface-container-high:   #222a3d;
+  --surface-container-highest:#2d3449;
+
+  /* On-Surface Colors */
+  --on-surface:               #dae2fd;
+  --on-surface-variant:       #b9cacb;
+
+  /* Inverse */
+  --inverse-surface:          #dae2fd;
+  --inverse-on-surface:       #283044;
+
+  /* Outline */
+  --outline:                  #849495;
+  --outline-variant:          #3b494b;
+
+  /* Primary */
+  --surface-tint:             #00dbe9;
+  --primary:                  #dbfcff;
+  --on-primary:               #00363a;
+  --primary-container:        #00f0ff;
+  --on-primary-container:     #006970;
+  --inverse-primary:          #006970;
+  --primary-fixed:            #7df4ff;
+  --primary-fixed-dim:        #00dbe9;
+  --on-primary-fixed:         #002022;
+  --on-primary-fixed-variant: #004f54;
+
+  /* Secondary */
+  --secondary:                #f5fff3;
+  --on-secondary:             #00391d;
+  --secondary-container:      #27ff97;
+  --on-secondary-container:   #00723f;
+  --secondary-fixed:          #5bffa1;
+  --secondary-fixed-dim:      #00e383;
+  --on-secondary-fixed:       #00210e;
+  --on-secondary-fixed-variant:#00522c;
+
+  /* Tertiary */
+  --tertiary:                 #f8f4ff;
+  --on-tertiary:              #1000a9;
+  --tertiary-container:       #d7d6ff;
+  --on-tertiary-container:    #494bd7;
+  --tertiary-fixed:           #e1e0ff;
+  --tertiary-fixed-dim:       #c0c1ff;
+  --on-tertiary-fixed:        #07006c;
+  --on-tertiary-fixed-variant:#2f2ebe;
+
+  /* Error */
+  --error:                    #ffb4ab;
+  --on-error:                 #690005;
+  --error-container:          #93000a;
+  --on-error-container:       #ffdad6;
+
+  /* Background */
+  --background:               #0b1326;
+  --on-background:            #dae2fd;
+
+  /* Typography */
+  --font-headline:  'Space Grotesk', sans-serif;
+  --font-body:      'Inter', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --unit:           4px;
+  --gutter:         24px;
+  --margin-desktop: 40px;
+  --container-max:  1440px;
+
+  /* Border Radius */
+  --radius-sm:      0.125rem;
+  --radius:         0.25rem;
+  --radius-md:      0.375rem;
+  --radius-lg:      0.5rem;
+  --radius-xl:      0.75rem;
+  --radius-full:    9999px;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-#root {
+
+html, body, #root {
   width: 100%;
   height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(125, 244, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* ===== Typography Utilities ===== */
+.font-headline { font-family: var(--font-headline); }
+.font-mono     { font-family: var(--font-mono); }
+
+/* ===== Glass Panel ===== */
+.glass-panel {
+  background: rgba(23, 31, 51, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===== Material Icons Adjustment ===== */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* ===== Scanline Animation ===== */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(200vh); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Leaflet Overrides for Dark Theme ===== */
+.leaflet-container {
+  background: var(--surface-container-lowest) !important;
+  font-family: var(--font-mono) !important;
+}
+
+.leaflet-control-layers {
+  background: rgba(23, 31, 51, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius-lg) !important;
+  color: var(--on-surface) !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+}
+
+.leaflet-control-layers-list label {
+  color: var(--on-surface-variant) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  padding: 3px 0 !important;
+}
+
+.leaflet-control-layers-base label span,
+.leaflet-control-layers-overlays label span {
+  color: var(--on-surface-variant) !important;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+}
+
+.leaflet-control-zoom a {
+  background: rgba(23, 31, 51, 0.9) !important;
+  color: var(--on-surface-variant) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  font-size: 16px !important;
+  transition: background 0.2s, color 0.2s !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: rgba(0, 240, 255, 0.1) !important;
+  color: var(--primary-container) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(23, 31, 51, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 240, 255, 0.2) !important;
+  border-radius: var(--radius-lg) !important;
+  color: var(--on-surface) !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(23, 31, 51, 0.95) !important;
+}
+
+.leaflet-popup-close-button {
+  color: var(--on-surface-variant) !important;
+}
+
+/* Recharts dark theme overrides */
+.recharts-text {
+  fill: var(--on-surface-variant) !important;
+}
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.06) !important;
 }

@@ -50,16 +50,18 @@ graph TD
 
 ## 🛰️ Copernicus Műholdas Rétegek Konfigurációja
 
-Az alábbi táblázat összefoglalja a térkép modulhoz kapcsolt Copernicus rétegeket:
+Az alábbi táblázat összefoglalja a térkép modulhoz kapcsolt aktuális Copernicus rétegeket:
 
 | Réteg Neve (UI) | Copernicus Layer ID | Endpoint / Instance ID | Megjegyzés |
 | :--- | :--- | :--- | :--- |
-| **Zavarosság (NDWI)** | `1_TRUE_COLOR` | `e28f1a16-eeae-472b-b095-39a50537ba6c` | Alga1 rétegként is hivatkozva a gyökérben |
-| **Sentinel-2 Algásodási Hőtérkép (NDCI)** | `2_TRUE_COLOR` | `841fca04-e199-424a-b6f7-86d4aa23b911` | Alga2 rétegként is hivatkozva a gyökérben |
-| **Hőtérkép (LST)** | `LST_HOTERKEP` | `5d044f7a-d7a1-4fb2-aeef-c5b6181e121c` | **[ÚJ]** Felszíni hőmérséklet hőtérkép |
-| **Beépítettség (NDBI)** | `NDBI_BEEPITETTSEG` | `5d044f7a-d7a1-4fb2-aeef-c5b6181e121c` | **[ÚJ]** Városi / beépített területek indexe |
-| **Zöldterület (NDVI)** | `NDVI_ZOLDTERULET` | `5d044f7a-d7a1-4fb2-aeef-c5b6181e121c` | **[ÚJ]** Vegetáció sűrűség és egészség |
-| **Légszennyezettség (NO₂)** | `NO2_LEGSZENNYEZES` | `5d044f7a-d7a1-4fb2-aeef-c5b6181e121c` | **[ÚJ]** Nitrogén-dioxid koncentráció |
+| **Zavarosság (NDWI)** | `1_TRUE_COLOR` | `e28f1a16-eeae-472b-b095-39a50537ba6c` | Alga1 rétegként is hivatkozva a gyökérben, 60% átlátszósággal |
+| **Sentinel-2 Algásodási Hőtérkép (NDCI)** | `2_TRUE_COLOR` | `841fca04-e199-424a-b6f7-86d4aa23b911` | Alga2 rétegként is hivatkozva a gyökérben, 60% átlátszósággal |
+| **Hőtérkép (LST)** | `LST` | `720a3d1b-dab6-4b26-aa51-fb8b7eb52d28` | **[ÚJ]** Hőmérséklet térkép, 60% átlátszósággal |
+| **Beépítettség (NDBI)** | `NDBI` | `720a3d1b-dab6-4b26-aa51-fb8b7eb52d28` | **[ÚJ]** Városi beépítettségi mutató, 60% átlátszósággal |
+| **Zöldterület (NDVI)** | `NDVI` | `720a3d1b-dab6-4b26-aa51-fb8b7eb52d28` | **[ÚJ]** Növényzetegészségi és sűrűségi index, 60% átlátszósággal |
+| **Növényzet nedvesség (NDMI)** | `NDMI` | `720a3d1b-dab6-4b26-aa51-fb8b7eb52d28` | **[ÚJ]** Növényzet nedvességtartalom index, 60% átlátszósággal |
+| **Víz (NDWI)** | `NDWI` | `720a3d1b-dab6-4b26-aa51-fb8b7eb52d28` | **[ÚJ]** Vízfelület detektáló index, 60% átlátszósággal |
 
-A rétegek a térkép jobb felső sarkában lévő **rétegválasztó (Layers Control)** menüből egyszerűen ki- és bekapcsolhatóak. Minden rétegnél a felhőlefedettségi küszöbérték `maxcc={20}`-ra van állítva a tiszta látvány érdekében, a `transparent={true}` és `format="image/png"` beállítások pedig biztosítják az OpenStreetMap alaptérkép feletti rétegződést.
+A rétegek a térkép jobb felső sarkában lévő **rétegválasztó (Layers Control)** menüből egyszerűen ki- és bekapcsolhatóak. Minden rétegnél a felhőlefedettségi küszöbérték `maxcc={20}`-ra van állítva a tiszta látvány érdekében, a `transparent={true}` és `format="image/png"` beállítások pedig biztosítják az OpenStreetMap alaptérkép feletti rétegződést, míg az `opacity={0.6}` attribútum finoman áttetszővé teszi őket a könnyebb tájékozódás érdekében.
+
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { WeatherTrendChart } from './weathertrendchart.jsx';
 
 const supabaseUrl = 'https://aamdkhjfmrtyrpminbah.supabase.co';
 const supabaseKey = 'sb_publishable_S4hByAurZQclluthyygTZA_p4vtgbHm';
@@ -27,7 +26,6 @@ export function WeatherPanel() {
                 'postgres_changes',
                 { event: 'INSERT', schema: 'public', table: 'air_weather_data' },
                 (payload) => {
-                    console.log('Új időjárás adat érkezett:', payload.new);
                     setCurrentWeather(payload.new);
                 }
             )
@@ -38,17 +36,26 @@ export function WeatherPanel() {
         };
     }, []);
 
-    if (!currentWeather) return <div>Időjárás adatok betöltése...</div>;
+    if (!currentWeather) {
+        return <div className="loading-state">Loading weather data...</div>;
+    }
 
     return (
-        <div style={{ textAlign: 'left', width: '100%' }}>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '10px' }}>☁ IDŐJÁRÁS</h2>
-            <div style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{currentWeather.temperature_c}°C</div>
-            <div style={{ marginTop: '10px', opacity: 0.9 }}>
-                Páratartalom: {currentWeather.humidity_pct}%<br />
-                Szélsebesség: {currentWeather.wind_speed_ms} km/h
+        <div className="live-data-grid">
+            <div className="live-data-card">
+                <div className="live-data-value temp">{currentWeather.temperature_c}°</div>
+                <div className="live-data-unit">Temperature °C</div>
             </div>
-            <WeatherTrendChart />
+            <div className="live-data-card">
+                <div className="live-data-value humidity">{currentWeather.humidity_pct}%</div>
+                <div className="live-data-unit">Humidity</div>
+            </div>
+            <div className="live-data-card" style={{ gridColumn: '1 / -1' }}>
+                <div className="live-data-value" style={{ fontSize: '16px', color: 'var(--tertiary-fixed-dim)' }}>
+                    {currentWeather.wind_speed_ms} <span style={{ fontSize: '12px' }}>km/h</span>
+                </div>
+                <div className="live-data-unit">Wind Speed</div>
+            </div>
         </div>
     );
 }

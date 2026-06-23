@@ -7,7 +7,7 @@ export function GardonyMap() {
     const gardonyPosition = [47.198, 18.618];
 
     // A te személyes Copernicus WMS linked!
-    const copernicusWmsUrl = "https://sh.dataspace.copernicus.eu/ogc/wms/5d044f7a-d7a1-4fb2-aeef-c5b6181e121c";
+    const copernicusWmsUrl = "https://sh.dataspace.copernicus.eu/ogc/wms/720a3d1b-dab6-4b26-aa51-fb8b7eb52d28";
 
     return (
         <div style={{ height: '520px', width: '100%', borderRadius: '8px', overflow: 'hidden' }}>
@@ -30,40 +30,55 @@ export function GardonyMap() {
                     <LayersControl.Overlay name="Hőtérkép (LST)">
                         <WMSTileLayer
                             url={copernicusWmsUrl}
-                            layers="LST_HOTERKEP"
+                            layers="LST"
                             format="image/png"
                             transparent={true}
                             maxcc={20}
+                            opacity={0.6}
                         />
                     </LayersControl.Overlay>
 
                     <LayersControl.Overlay name="Beépítettség (NDBI)">
                         <WMSTileLayer
                             url={copernicusWmsUrl}
-                            layers="NDBI_BEEPITETTSEG"
+                            layers="NDBI"
                             format="image/png"
                             transparent={true}
                             maxcc={20}
+                            opacity={0.6}
                         />
                     </LayersControl.Overlay>
 
                     <LayersControl.Overlay checked name="Zöldterület (NDVI)">
                         <WMSTileLayer
                             url={copernicusWmsUrl}
-                            layers="NDVI_ZOLDTERULET"
+                            layers="NDVI"
                             format="image/png"
                             transparent={true}
                             maxcc={20}
+                            opacity={0.6}
                         />
                     </LayersControl.Overlay>
 
-                    <LayersControl.Overlay name="Légszennyezettség (NO₂)">
+                    <LayersControl.Overlay name="Növényzet nedvesség (NDMI)">
                         <WMSTileLayer
                             url={copernicusWmsUrl}
-                            layers="NO2_LEGSZENNYEZES"
+                            layers="NDMI"
                             format="image/png"
                             transparent={true}
                             maxcc={20}
+                            opacity={0.6}
+                        />
+                    </LayersControl.Overlay>
+
+                    <LayersControl.Overlay name="Víz (NDWI)">
+                        <WMSTileLayer
+                            url={copernicusWmsUrl}
+                            layers="NDWI"
+                            format="image/png"
+                            transparent={true}
+                            maxcc={20}
+                            opacity={0.6}
                         />
                     </LayersControl.Overlay>
 
