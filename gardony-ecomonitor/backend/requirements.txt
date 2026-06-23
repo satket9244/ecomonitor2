@@ -1,0 +1,6 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+earthengine-api>=0.1.400
+pydantic>=2.5.0
+shapely>=2.0.0
+python-dotenv>=1.0.0

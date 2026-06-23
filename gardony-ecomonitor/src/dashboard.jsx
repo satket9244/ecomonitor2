@@ -5,6 +5,7 @@ import { GardonyDashboardMap } from './terkep.jsx';
 import { WaterQualityPanel } from './waterquality.jsx';
 import { AirQualityPanel } from './airquality.jsx';
 import { LatestReportPanel } from './reports.jsx';
+import { UHIPanel } from './uhi.jsx';
 
 // Spectral layer definitions with descriptions (shown only when ON)
 const SPECTRAL_LAYERS = [
@@ -213,6 +214,11 @@ export function GardonyDashboard() {
                             <span>Jan 23</span>
                             <span>Current</span>
                         </div>
+                    </div>
+
+                    {/* UHI (Urban Heat Island) Panel */}
+                    <div style={{ borderTop: '1px solid rgba(59,73,75,0.2)', paddingTop: '14px' }}>
+                        <UHIPanel />
                     </div>
 
                     {/* Early Warning System */}
