@@ -1,36 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
+import { DrawingContext } from './DrawingContext';
 
 const API_BASE = '/api/v1/uhi';
-
-// Pre-defined polygons for Gárdony municipality
-const GARDONY_URBAN_CORE = {
-    type: 'Polygon',
-    coordinates: [[
-        [18.61, 47.195],
-        [18.635, 47.195],
-        [18.635, 47.21],
-        [18.61, 47.21],
-        [18.61, 47.195],
-    ]],
-};
-
-const GARDONY_RURAL_REF = {
-    type: 'Polygon',
-    coordinates: [[
-        [18.55, 47.17],
-        [18.59, 47.17],
-        [18.59, 47.19],
-        [18.55, 47.19],
-        [18.55, 47.17],
-    ]],
-};
 
 export function UHIPanel() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { drawnPolygons } = useContext(DrawingContext);
 
     const calculateUHI = useCallback(async () => {
+        if (!drawnPolygons.downtown || !drawnPolygons.greenspace) {
+            setError('Please draw both Downtown and Greenspace areas on the map first');
+            return;
+        }
+
         setLoading(true);
         setError(null);
         setResult(null);
@@ -40,8 +24,8 @@ export function UHIPanel() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    urban_core_polygon: GARDONY_URBAN_CORE,
-                    rural_reference_polygon: GARDONY_RURAL_REF,
+                    urban_core_polygon: drawnPolygons.downtown,
+                    rural_reference_polygon: drawnPolygons.greenspace,
                 }),
             });
 
@@ -57,7 +41,7 @@ export function UHIPanel() {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [drawnPolygons]);
 
     // Severity colour based on anomaly
     const severityColor = (anomaly) => {
@@ -80,12 +64,41 @@ export function UHIPanel() {
                 <span className="uhi-title">UHI Intensity</span>
             </div>
 
+            {/* Status indicators for drawn areas */}
+            <div style={{
+                padding: '8px 0',
+                fontSize: '12px',
+                display: 'flex',
+                gap: '12px',
+                marginBottom: '8px',
+            }}>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: drawnPolygons.downtown ? '#22c55e' : '#999',
+                }}>
+                    <span style={{ fontSize: '14px' }}>📍</span>
+                    {drawnPolygons.downtown ? 'Downtown' : 'No Downtown'}
+                </div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: drawnPolygons.greenspace ? '#22c55e' : '#999',
+                }}>
+                    <span style={{ fontSize: '14px' }}>🌿</span>
+                    {drawnPolygons.greenspace ? 'Greenspace' : 'No Greenspace'}
+                </div>
+            </div>
+
             {/* Calculate button */}
             {!result && !loading && (
                 <button
                     className="uhi-calc-btn"
                     onClick={calculateUHI}
-                    disabled={loading}
+                    disabled={loading || !drawnPolygons.downtown || !drawnPolygons.greenspace}
+                    title={(!drawnPolygons.downtown || !drawnPolygons.greenspace) ? 'Draw both areas on the map first' : ''}
                 >
                     CALCULATE UHI
                 </button>

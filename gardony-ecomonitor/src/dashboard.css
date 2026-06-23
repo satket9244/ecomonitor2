@@ -930,3 +930,204 @@
     font-size: 16px;
   }
 }
+
+/* ── UHI (Urban Heat Island) Panel ──────────────────────────────────────── */
+.uhi-section {
+  padding: 0 20px 20px;
+}
+
+.uhi-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.uhi-title {
+  font-family: var(--font-headline);
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.uhi-calc-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--surface-container-low);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-sm);
+  color: var(--primary-container);
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.uhi-calc-btn:hover {
+  background: rgba(0, 240, 255, 0.06);
+  border-color: rgba(0, 240, 255, 0.45);
+}
+
+.uhi-calc-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.uhi-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--on-surface-variant);
+  opacity: 0.7;
+}
+
+.uhi-spinner {
+  font-size: 18px;
+  color: var(--primary-container);
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.uhi-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--error);
+  line-height: 1.5;
+  background: rgba(255, 180, 171, 0.06);
+  border-left: 2px solid var(--error);
+  padding: 8px 10px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.uhi-result {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uhi-anomaly-row {
+  text-align: center;
+}
+
+.uhi-anomaly-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.uhi-anomaly-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.uhi-means-grid {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.uhi-mean-card {
+  flex: 1;
+  text-align: center;
+  padding: 8px 4px;
+  background: var(--surface-container-low);
+  border: 1px solid rgba(59, 73, 75, 0.3);
+  border-radius: var(--radius);
+}
+
+.uhi-mean-value {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.uhi-mean-value.urban  { color: var(--error); }
+.uhi-mean-value.rural  { color: var(--tertiary-fixed-dim); }
+
+.uhi-mean-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.uhi-mean-divider {
+  width: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--on-surface-variant);
+  opacity: 0.4;
+}
+
+.uhi-secap {
+  background: rgba(0, 240, 255, 0.04);
+  border: 1px solid rgba(0, 240, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+}
+
+.uhi-secap-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 700;
+  color: var(--primary-container);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+  padding: 1px 4px;
+  background: rgba(0, 240, 255, 0.1);
+  border-radius: 2px;
+}
+
+.uhi-secap-text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--on-surface);
+  line-height: 1.55;
+}
+
+.uhi-recalc-btn {
+  width: 100%;
+  padding: 7px;
+  background: transparent;
+  border: 1px solid rgba(59, 73, 75, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--on-surface-variant);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.uhi-recalc-btn:hover {
+  background: rgba(49, 57, 77, 0.3);
+  border-color: rgba(59, 73, 75, 0.5);
+}

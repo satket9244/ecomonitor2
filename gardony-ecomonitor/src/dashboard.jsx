@@ -6,6 +6,7 @@ import { WaterQualityPanel } from './waterquality.jsx';
 import { AirQualityPanel } from './airquality.jsx';
 import { LatestReportPanel } from './reports.jsx';
 import { UHIPanel } from './uhi.jsx';
+import { DrawingProvider } from './DrawingContext';
 
 // Spectral layer definitions with descriptions (shown only when ON)
 const SPECTRAL_LAYERS = [
@@ -74,7 +75,8 @@ export function GardonyDashboard() {
     };
 
     return (
-        <div className="metropol-shell">
+        <DrawingProvider>
+            <div className="metropol-shell">
 
             {/* ══ LEFT SIDEBAR ══════════════════════════════════════════════ */}
             <aside className="sidebar-left">
@@ -300,5 +302,6 @@ export function GardonyDashboard() {
             </div>
 
         </div>
+        </DrawingProvider>
     );
 }

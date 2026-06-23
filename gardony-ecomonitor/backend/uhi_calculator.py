@@ -53,7 +53,7 @@ def _init_ee() -> None:
     except Exception:
         # If default init fails, try the high-volume endpoint
         try:
-            ee.Initialize(opt_url="https://earthengine-highvolume.googleapis.com")
+            ee.Initialize(project='gen-lang-client-0146925135', opt_url="https://earthengine-highvolume.googleapis.com")
         except Exception as exc:
             logger.warning("Earth Engine initialisation failed: %s", exc)
             raise
