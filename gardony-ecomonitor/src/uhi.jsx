@@ -20,7 +20,11 @@ export function UHIPanel() {
         setResult(null);
 
         try {
-            const res = await fetch(`${API_BASE}/intensity`, {
+            console.log(JSON.stringify({
+             urban_core_polygon: drawnPolygons.downtown,
+             rural_reference_polygon: drawnPolygons.greenspace,
+             }, null, 2));
+            const res = await fetch('https://gardony.ujfalusipeter.hu/api/api/v1/uhi/intensity', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

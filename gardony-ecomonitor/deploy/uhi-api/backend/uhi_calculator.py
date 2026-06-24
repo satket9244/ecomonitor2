@@ -40,38 +40,23 @@ KELVIN_TO_CELSIUS = -273.15
 # Earth Engine initialisation
 # ---------------------------------------------------------------------------
 
-import os
-
 _ee_initialised = False
 
+
 def _init_ee() -> None:
-    """Initialise Earth Engine. Prefer service account on server, fallback locally."""
+    """Initialise Earth Engine (high-volume endpoint). Idempotent."""
     global _ee_initialised
     if _ee_initialised:
         return
-
-    sa = os.getenv("EE_SERVICE_ACCOUNT")
-    key_path = os.getenv("EE_PRIVATE_KEY")
-
     try:
-        if sa and key_path:
-            credentials = ee.ServiceAccountCredentials(sa, key_path)
-            ee.Initialize(
-                credentials=credentials,
-                project='gen-lang-client-0146925135',
-                opt_url="https://earthengine-highvolume.googleapis.com",
-            )
-            logger.info("Earth Engine initialised with service account: %s", sa)
-        else:
-            ee.Initialize(
-                project='gen-lang-client-0146925135',
-                opt_url="https://earthengine-highvolume.googleapis.com",
-            )
-            logger.info("Earth Engine initialised with default credentials")
-    except Exception as exc:
-        logger.warning("Earth Engine initialisation failed: %s", exc)
-        raise
-
+        ee.Initialize()
+    except Exception:
+        # If default init fails, try the high-volume endpoint
+        try:
+            ee.Initialize(project='gen-lang-client-0146925135', opt_url="https://earthengine-highvolume.googleapis.com")
+        except Exception as exc:
+            logger.warning("Earth Engine initialisation failed: %s", exc)
+            raise
     _ee_initialised = True
 
 
