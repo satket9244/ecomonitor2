@@ -1,0 +1,21 @@
+# Core FastAPI framework
+fastapi==0.104.1
+pydantic==2.5.2
+
+# ASGI-to-WSGI adapter for cPanel Passenger compatibility
+asgiref==3.7.1
+
+# Earth Engine API for satellite data processing
+earthengine-api==0.1.407
+
+# Geospatial processing
+shapely==2.0.1
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Production ASGI server (for local testing, not needed on Passenger)
+# uvicorn[standard]==0.24.0  # Only for local dev, Passenger serves via WSGI
+
+# Security & production
+gunicorn==21.2.0  # Optional: if Passenger fails, can fallback to gunicorn
