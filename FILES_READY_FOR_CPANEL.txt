@@ -1,0 +1,117 @@
+================================================================================
+                    cPANEL DEPLOYMENT - FILES READY
+================================================================================
+
+✅ NEW FILES CREATED IN gardony-ecomonitor/:
+
+  1. passenger_wsgi.py              (120 lines)
+     └─ WSGI entry point for Passenger
+     └─ Includes ASGItoWSGI converter class
+     └─ Ready to upload to uhi-api root
+
+  2. requirements-cpanel.txt        (11 lines)
+     └─ Production dependencies
+     └─ Includes asgiref for ASGI-to-WSGI bridge
+     └─ pip install -r requirements-cpanel.txt
+
+  3. .env.example                   (Template)
+     └─ Environment variable reference
+     └─ Copy to .env locally (don't upload)
+
+================================================================================
+
+✅ EXISTING FILES (No changes, just upload as-is):
+
+  backend/__init__.py               ✓
+  backend/main.py                   ✓
+  backend/routes.py                 ✓
+  backend/schemas.py                ✓
+  backend/uhi_calculator.py         ✓
+
+================================================================================
+
+✅ DOCUMENTATION CREATED:
+
+  1. DEPLOYMENT_READY.md            ← START HERE (overview & checklist)
+  2. CPANEL_COMPLETE_DEPLOYMENT.md  ← MAIN GUIDE (step-by-step)
+  3. CPANEL_QUICK_REFERENCE.md      ← CLI COMMANDS (copy-paste ready)
+  4. CPANEL_DEPLOYMENT_GUIDE.md     ← DETAILED REFERENCE (troubleshooting)
+
+================================================================================
+
+📋 UPLOAD PACKAGE CONTENTS:
+
+To deploy, upload these to cPanel uhi-api/ folder:
+
+  uhi-api/
+  ├── passenger_wsgi.py                         ← NEW
+  ├── requirements-cpanel.txt                   ← NEW
+  ├── backend/
+  │   ├── __init__.py
+  │   ├── main.py
+  │   ├── routes.py
+  │   ├── schemas.py
+  │   └── uhi_calculator.py
+  └── [OPTIONAL] ee-service-account.json        ← If using service account
+
+================================================================================
+
+🔧 PIP INSTALL COMMAND (Copy-Paste):
+
+pip install fastapi==0.104.1 pydantic==2.5.2 asgiref==3.7.1 earthengine-api==0.1.407 shapely==2.0.1 python-dotenv==1.0.0
+
+Or use: pip install -r requirements-cpanel.txt
+
+================================================================================
+
+🌍 ENVIRONMENT VARIABLES (Set in cPanel Setup Python App):
+
+EE_SERVICE_ACCOUNT = your-service-account@iam.gserviceaccount.com
+EE_PRIVATE_KEY = /home/yourusername/uhi-api/ee-service-account.json
+
+(Leave blank if using default Earth Engine authentication)
+
+================================================================================
+
+✅ API ENDPOINTS AVAILABLE:
+
+GET /health
+  → Returns: {"status":"ok"}
+
+POST /api/v1/uhi/intensity
+  → Expects GeoJSON polygons
+  → Returns: urban temp, rural temp, UHI anomaly, SECAP statement
+
+GET /api/docs
+  → Swagger UI documentation
+
+================================================================================
+
+🚀 DEPLOYMENT STEPS:
+
+1. Read: CPANEL_COMPLETE_DEPLOYMENT.md
+2. Prepare upload package with files above
+3. Upload via FTP to cPanel uhi-api/
+4. SSH/Terminal: pip install -r requirements-cpanel.txt
+5. Set environment variables in cPanel
+6. Restart app in cPanel
+7. Test: curl https://yourdomain.com/api/health
+8. Update CORS in main.py for production domain
+
+================================================================================
+
+❓ NEED HELP?
+
+  Quick commands:      → CPANEL_QUICK_REFERENCE.md
+  Full walkthrough:    → CPANEL_COMPLETE_DEPLOYMENT.md
+  Troubleshooting:     → CPANEL_DEPLOYMENT_GUIDE.md
+  Overview:            → DEPLOYMENT_READY.md
+
+================================================================================
+
+STATUS: ✅ READY FOR DEPLOYMENT
+
+All files are created, committed, and ready to upload.
+Start with DEPLOYMENT_READY.md or CPANEL_COMPLETE_DEPLOYMENT.md
+
+================================================================================
